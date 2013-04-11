@@ -1,0 +1,18 @@
+<section id="forms">
+  <div class="page-header">
+  </div>
+
+  <div class="row">
+    <div class="span10 offset1">
+      <%= form_tag sessions_path, class: 'form-horizontal well' do |f| %>
+        <fieldset>
+          <legend>
+            Insert Login Information</legend>
+            <%= text_field_tag :email, params[:email], class: "input-x large", placeholder: 'Email' %>
+            <%= password_field_tag :password, params[:password], class: "input-x large", placeholder: 'Password' %>
+            <%= submit_tag 'Lgin', class: "btn btn-primary" %>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+</section>

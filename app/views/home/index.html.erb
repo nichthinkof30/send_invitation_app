@@ -1,0 +1,65 @@
+<section id="forms">
+  <div class="page-header">
+    <h1>Forms</h1>
+  </div>
+
+  <div class="row">
+    <div class="span10 offset1">
+      <%= form_tag send_invitation_path, class: 'form-horizontal well'  do |f| %>
+        <fieldset>
+        <%= hidden_field_tag :send, params[:send] %>
+        <% if current_user %>
+          <legend>Your Invitation Code is <%= current_user.device_id %></legend>
+            <%= submit_tag 'Send Invitation', class: "btn btn-primary" %>
+        <% end %>
+        </fieldset>
+      <% end %>
+    </div>
+
+    <div class="span10 offset1">
+      <%= form_tag check_invitation_path, class: 'form-horizontal well' do |f| %>
+        <fieldset>
+          <legend>
+            Get your rewards by input invitation code</legend>
+            <%= text_field_tag :invitation_code, params[:invitation_code], class: "input-x large", placeholder: 'Invitation Code' %>
+            <% if current_user.invited_by.blank? %>
+              <%= submit_tag 'Get Reward', class: "btn btn-primary" %>
+            <% else %>
+              <%= submit_tag 'Get Reward', class: "btn btn-primary", disabled: true %>
+            <% end %>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+
+</section>
+
+<section id="tables">
+  <div class="page-header">
+    <h1>Rewards</h1>
+  </div>
+  
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Reward</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @rewards.present? %>
+        <% count = 0 %>
+        <% @rewards.each do |r| %>
+        <tr>
+          <td><%= count+=1 %></td>
+          <td><%= r.name %></td>
+        </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td>No reward yet!</td>
+        <tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
